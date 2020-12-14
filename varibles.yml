@@ -1,2 +1,2 @@
-osname: "dockerwebserver"
-webpage: "webpage.html"
+osname: "os"
+webpage: "index.html"

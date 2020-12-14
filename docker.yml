@@ -1,4 +1,4 @@
-- hosts: all
+- hosts: docker
   vars_files:
   - varibles.yml
   tasks:
@@ -29,11 +29,18 @@
         src: "{{webpage}}"
         dest: "/root/dockerserver"
 
+   - name: "Pulling httpd server image"
+     docker_image:
+         name: httpd
+         source: pull     
+
    - name: "Launching Docker Container"
      docker_container: 
         name: "{{osname}}"
-        image: "webserverimage"
+        image: "httpd"
+        ports: 
+           - "5000:80"
         state: started
         tty: yes
-        volumes: "/root/dockerserver:/var/www/html" 
+        volumes: "/root/dockerserver:/usr/local/apache2/htdocs/" 
         
